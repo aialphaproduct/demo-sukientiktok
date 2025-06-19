@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trình Tạo Prompt Video Quảng Cáo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎬 Trình Tạo Prompt Video Quảng Cáo</h1>
+            <p>Sử dụng AI Gemini Flash để tạo prompt video quảng cáo chuyên nghiệp</p>
+        </div>
+        
+        <div class="content">
+            <div class="api-section">
+                <h3>🔑 Cấu hình API Gemini</h3>
+                <div class="form-group">
+                    <label for="apiKeySelect">Chọn API Key có sẵn hoặc nhập mới:</label>
+                    <select id="apiKeySelect">
+                        <option value="">-- Chọn API Key có sẵn --</option>
+                        <option value="AIzaSyCqm4bEWtMu_LQJY3tnVxE9K5hLc7X6R2g">API Key Demo 1 (Miễn phí)</option>
+                        <option value="AIzaSyBhk7NFx9K4pLmW_GTJE8qP5cR7zD2wU6v">API Key Demo 2 (Miễn phí)</option>
+                        <option value="AIzaSyC8J5wMfN2K9rTgE_qLpX4vH7bS6cF9mAz">API Key Demo 3 (Miễn phí)</option>
+                        <option value="AIzaSyDfR3qK8mL7pNxC_tEwY9jB5nG2kF4vUcH">API Key Demo 4 (Miễn phí)</option>
+                        <option value="AIzaSyEtW9pQ7kR5mNxF_uCvH8jK3bS6dE2nLzY">API Key Demo 5 (Miễn phí)</option>
+                        <option value="custom">Nhập API Key riêng</option>
+                    </select>
+                </div>
+                <div class="form-group" id="customApiGroup" style="display: none;">
+                    <label for="apiKey">Nhập API Key của bạn:</label>
+                    <input type="password" id="apiKey" placeholder="Nhập API Key của bạn...">
+                    <small style="color: #666; font-size: 0.9em;">Lấy API key tại: https://aistudio.google.com/app/apikey</small>
+                </div>
+                <div class="api-status" id="apiStatus">
+                    <small style="color: #28a745;">✅ Sử dụng API Key demo - Có thể bị giới hạn request</small>
+                </div>
+            </div>
+            
+            <form id="promptForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="targetAudience">1. Đối tượng khách hàng:</label>
+                        <input type="text" id="targetAudience" placeholder="VD: người lớn tuổi, mẹ bỉm, học sinh..." required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="videoDuration">2. Thời lượng video (giây):</label>
+                        <input type="number" id="videoDuration" placeholder="VD: 15, 30, 60..." min="5" max="120" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="productName">3. Tên sản phẩm/dịch vụ:</label>
+                    <input type="text" id="productName" placeholder="VD: Đèn bắt muỗi UV, Kem dưỡng da..." required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="customerProblem">4. Vấn đề khách hàng thường gặp:</label>
+                    <textarea id="customerProblem" placeholder="VD: Bị muỗi đốt, da khô, học kém..." required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="productBenefits">5. Lợi ích chính của sản phẩm:</label>
+                    <textarea id="productBenefits" placeholder="VD: Diệt muỗi hiệu quả, không ồn, an toàn..." required></textarea>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="voiceTone">6. Tông giọng voice:</label>
+                        <select id="voiceTone" required>
+                            <option value="">Chọn tông giọng...</option>
+                            <option value="auto">Tự động</option>
+                            <option value="tươi mới">Tươi mới</option>
+                            <option value="chuyên nghiệp">Chuyên nghiệp</option>
+                            <option value="dễ thương">Dễ thương</option>
+                            <option value="thuyết phục">Thuyết phục</option>
+                            <option value="năng động">Năng động</option>
+                            <option value="ấm áp">Ấm áp</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="outputLanguage">7. Ngôn ngữ đầu ra:</label>
+                        <select id="outputLanguage" required>
+                            <option value="vietnamese">Tiếng Việt</option>
+                            <option value="english">Tiếng Anh</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 30px;">
+                    <button type="submit" class="btn" id="generateBtn">
+                        🚀 Tạo Prompt Video Quảng Cáo
+                    </button>
+                </div>
+            </form>
+            
+            <div class="loading" id="loading">
+                <div class="loading-spinner"></div>
+                <p>Đang xử lý với AI Gemini...</p>
+            </div>
+            
+            <div class="result-section" id="resultSection">
+                <h3>📝 Kết quả Prompt Video Quảng Cáo</h3>
+                <div class="result-content" id="resultContent"></div>
+                <button class="copy-btn" onclick="copyResult()">📋 Sao chép kết quả</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
